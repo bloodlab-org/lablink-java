@@ -1,0 +1,2114 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: laborit@blutspende.de
+    name: DRK Blutspendedienst Baden-Wuerttemberg Hessen
+    url: https://blutspende.de
+  description: Lablink Swagger documentation
+  license:
+    name: Commercial license
+  title: Lablink
+  version: "3.0"
+servers:
+- url: https://blutspende.org/lablink
+paths:
+  /api/documents:
+    get:
+      description: Gets all document.
+      operationId: GetDocumentsV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The desired page number
+        in: query
+        name: page
+        required: true
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: The desired number of items per page
+        in: query
+        name: pageSize
+        required: true
+        schema:
+          default: 25
+          maximum: 2000
+          minimum: 1
+          type: integer
+      - description: "The sorting parameters in the format of \"fieldName,asc/desc\"\
+          . E.g. type,desc"
+        explode: true
+        in: query
+        name: sort
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocumentsV3_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get documents
+      tags:
+      - Document
+      x-accepts: application/json
+  /api/documents/{id}:
+    get:
+      description: Gets a document.
+      operationId: GetDocumentV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The document ID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get document
+      tags:
+      - Document
+      x-accepts: application/json
+  /api/examinations:
+    get:
+      description: Gets all examination.
+      operationId: GetExaminationsV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The desired page number
+        in: query
+        name: page
+        required: true
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: The desired number of items per page
+        in: query
+        name: pageSize
+        required: true
+        schema:
+          default: 25
+          maximum: 2000
+          minimum: 1
+          type: integer
+      - description: "The sorting parameters in the format of \"fieldName,asc/desc\"\
+          . E.g. type,desc"
+        explode: true
+        in: query
+        name: sort
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The code filter
+        in: query
+        name: code
+        schema:
+          type: string
+      - description: The name filter
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: The unit filter
+        in: query
+        name: unit
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetExaminationsV3_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get examinations
+      tags:
+      - Examination
+      x-accepts: application/json
+  /api/locations:
+    get:
+      description: Gets all location.
+      operationId: GetLocationsV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The desired page number
+        in: query
+        name: page
+        required: true
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: The desired number of items per page
+        in: query
+        name: pageSize
+        required: true
+        schema:
+          default: 25
+          maximum: 2000
+          minimum: 1
+          type: integer
+      - description: "The sorting parameters in the format of \"fieldName,asc/desc\"\
+          . E.g. type,desc"
+        explode: true
+        in: query
+        name: sort
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The name filter
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLocationsV3_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get locations
+      tags:
+      - Location
+      x-accepts: application/json
+  /api/login:
+    post:
+      description: Login and request access token.
+      operationId: LoginV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LoginV3_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      summary: Login
+      tags:
+      - Auth
+      x-content-type: application/x-www-form-urlencoded
+      x-accepts: application/json
+  /api/order-states:
+    get:
+      description: Gets the state of all orders.
+      operationId: GetOrderStatesV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The desired page number
+        in: query
+        name: page
+        required: true
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: The desired number of items per page
+        in: query
+        name: pageSize
+        required: true
+        schema:
+          default: 25
+          maximum: 2000
+          minimum: 1
+          type: integer
+      - description: "The sorting parameters in the format of \"fieldName,asc/desc\"\
+          . E.g. type,desc"
+        explode: true
+        in: query
+        name: sort
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: "The created-from filter (inclusive). Format: yyyy-MM-dd."
+        in: query
+        name: createdFrom
+        schema:
+          type: string
+      - description: "The created-to filter (exclusive). Format: yyyy-MM-dd."
+        in: query
+        name: createdTo
+        schema:
+          type: string
+      - description: The searched content in the different dataset
+        in: query
+        name: searchContent
+        schema:
+          type: string
+      - description: The state filter
+        in: query
+        name: state
+        schema:
+          enum:
+          - CONFIRMATORY
+          - DELETED
+          - ENTERED
+          - FINALIZED
+          - PROCESSING
+          - WAITING_FOR_MATERIAL
+          type: string
+      - description: The type filter
+        in: query
+        name: type
+        schema:
+          enum:
+          - DONOR
+          - BONE_MARROW_DONOR
+          - PERSONAL
+          - PSEUDONYMIZED
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrderStatesV3_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get order states
+      tags:
+      - Order
+      - OrderState
+      x-accepts: application/json
+  /api/orders:
+    delete:
+      description: Deletes all order.
+      operationId: DeleteOrdersV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        description: The order IDs
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: Partially processed
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Delete orders
+      tags:
+      - Order
+      x-codegen-request-body-name: request
+      x-content-type: application/json
+      x-accepts: application/json
+    get:
+      description: Gets all order.
+      operationId: GetOrdersV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The desired page number
+        in: query
+        name: page
+        required: true
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: The desired number of items per page
+        in: query
+        name: pageSize
+        required: true
+        schema:
+          default: 25
+          maximum: 2000
+          minimum: 1
+          type: integer
+      - description: "The sorting parameters in the format of \"fieldName,asc/desc\"\
+          . E.g. type,desc"
+        explode: true
+        in: query
+        name: sort
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: "The created-from filter (inclusive). Format: yyyy-MM-dd."
+        in: query
+        name: createdFrom
+        schema:
+          type: string
+      - description: "The created-to filter (exclusive). Format: yyyy-MM-dd."
+        in: query
+        name: createdTo
+        schema:
+          type: string
+      - description: The location filter
+        in: query
+        name: locationId
+        schema:
+          type: string
+      - description: The searched content in the different dataset
+        in: query
+        name: searchContent
+        schema:
+          type: string
+      - description: The state filter
+        in: query
+        name: state
+        schema:
+          enum:
+          - CONFIRMATORY
+          - DELETED
+          - ENTERED
+          - FINALIZED
+          - PROCESSING
+          - WAITING_FOR_MATERIAL
+          type: string
+      - description: The type filter
+        in: query
+        name: type
+        schema:
+          enum:
+          - DONOR
+          - BONE_MARROW_DONOR
+          - PERSONAL
+          - PSEUDONYMIZED
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrdersV3_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get orders
+      tags:
+      - Order
+      x-accepts: application/json
+    post:
+      description: Creates order(s).
+      operationId: CreateOrdersV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Order'
+              type: array
+        description: The order data
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrderMetadata'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Content Too Large
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Create order(s)
+      tags:
+      - Order
+      x-codegen-request-body-name: request
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/orders/{id}:
+    delete:
+      description: Deletes an order.
+      operationId: DeleteOrderV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The order ID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Delete order
+      tags:
+      - Order
+      x-accepts: application/json
+    get:
+      description: Gets an order.
+      operationId: GetOrderV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The order ID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get order
+      tags:
+      - Order
+      x-accepts: application/json
+  /api/orders/{id}/state:
+    get:
+      description: Gets an order's state.
+      operationId: GetOrderStateV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The order ID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrderStatesV3_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get order state
+      tags:
+      - Order
+      x-accepts: application/json
+  /api/selections:
+    delete:
+      description: Deletes selections by the provided selection IDs.
+      operationId: DeleteSelectionsV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        description: The selection IDs
+        required: true
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Delete selections
+      tags:
+      - Selection
+      x-codegen-request-body-name: request
+      x-content-type: application/json
+      x-accepts: application/json
+    post:
+      description: |-
+        Creates a selection based on the provided Order ID-s over Documents, Orders or Order-states.
+        A selection is used for creating Document, Order or Orders-state queries filtered by the provided Order ID-s.
+      operationId: CreateSelectionV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Selection'
+        description: The selection data
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectionMetadata'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Create a selection
+      tags:
+      - Selection
+      x-codegen-request-body-name: request
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/selections/{id}:
+    delete:
+      description: Deletes a selection by the provided selection ID.
+      operationId: DeleteSelectionV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The Selection ID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Delete selection
+      tags:
+      - Selection
+      x-accepts: application/json
+    get:
+      description: Gets the metadata of the specified selection.
+      operationId: GetSelectionV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The Selection ID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectionMetadata'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get selection metadata
+      tags:
+      - Selection
+      x-accepts: application/json
+  /api/selections/{id}/documents:
+    get:
+      description: Gets documents based on the specified selection.
+      operationId: GetSelectionDocumentsV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The Selection ID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The desired page number
+        in: query
+        name: page
+        required: true
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: The desired number of items per page
+        in: query
+        name: pageSize
+        required: true
+        schema:
+          default: 25
+          maximum: 2000
+          minimum: 1
+          type: integer
+      - description: "The sorting parameters in the format of \"fieldName,asc/desc\"\
+          . E.g. type,desc"
+        explode: true
+        in: query
+        name: sort
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSelectionDocumentsV3_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get selected documents
+      tags:
+      - Selection
+      - Document
+      x-accepts: application/json
+  /api/selections/{id}/order-states:
+    get:
+      description: Gets order states based on the specified selection.
+      operationId: GetSelectionOrdersStatesV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The Selection ID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The desired page number
+        in: query
+        name: page
+        required: true
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: The desired number of items per page
+        in: query
+        name: pageSize
+        required: true
+        schema:
+          default: 25
+          maximum: 2000
+          minimum: 1
+          type: integer
+      - description: "The sorting parameters in the format of \"fieldName,asc/desc\"\
+          . E.g. type,desc"
+        explode: true
+        in: query
+        name: sort
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrderStatesV3_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get selected order states
+      tags:
+      - Selection
+      - Order
+      - OrderState
+      x-accepts: application/json
+  /api/selections/{id}/orders:
+    get:
+      description: Gets Orders based on the specified selection.
+      operationId: GetSelectionOrdersV3
+      parameters:
+      - description: The API version
+        in: header
+        name: x-api-version
+        schema:
+          default: "3.0"
+          type: string
+      - description: The Selection ID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The desired page number
+        in: query
+        name: page
+        required: true
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: The desired number of items per page
+        in: query
+        name: pageSize
+        required: true
+        schema:
+          default: 25
+          maximum: 2000
+          minimum: 1
+          type: integer
+      - description: "The sorting parameters in the format of \"fieldName,asc/desc\"\
+          . E.g. type,desc"
+        explode: true
+        in: query
+        name: sort
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrdersV3_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+          description: Too Many Requests
+      security:
+      - BearerAuth: []
+      summary: Get selected orders
+      tags:
+      - Selection
+      - Order
+      x-accepts: application/json
+  /health:
+    get:
+      description: Shows if the service is running or not.
+      operationId: GetHealth
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+          description: OK
+      summary: Service health check
+      tags:
+      - Health
+      x-accepts: application/json
+components:
+  schemas:
+    ApiError:
+      properties:
+        detail:
+          description: The message describing the error
+          type: string
+        errors:
+          description: The list of several errors
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+        instance:
+          description: The instance
+          type: string
+        status:
+          description: The response status code
+          type: integer
+        title:
+          description: The error title
+          type: string
+        type:
+          description: The error type
+          type: string
+      type: object
+    BloodDonor:
+      properties:
+        dateOfBirth:
+          description: The date of birth (yyyy-MM-dd)
+          format: date
+          type: string
+        donationCode:
+          description: The donation code
+          type: string
+        donorCode:
+          description: The donor code
+          type: string
+        gender:
+          allOf:
+          - $ref: '#/components/schemas/Gender'
+          description: "The gender (Female, Male, Unknown)"
+          type: object
+      required:
+      - dateOfBirth
+      - donationCode
+      - donorCode
+      - gender
+      type: object
+    BoneMarrowDonor:
+      properties:
+        donorCode:
+          description: The donor code
+          type: string
+      type: object
+    Document:
+      example:
+        filename: filename
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        filename:
+          description: The filename
+          type: string
+        id:
+          description: The ID
+          format: uuid
+          type: string
+      type: object
+    DocumentMetadata:
+      properties:
+        fileSize:
+          description: The file size
+          type: string
+        fileType:
+          description: The file type
+          type: string
+        filename:
+          description: The filename
+          type: string
+        id:
+          description: The document ID
+          format: uuid
+          type: string
+        links:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The links to the file
+          type: object
+      type: object
+    Error:
+      properties:
+        errors:
+          description: The list of several nested errors
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+        message:
+          description: The message
+          type: string
+        messageKey:
+          description: The message key
+          type: string
+        messageParams:
+          description: The message params (to be used optionally)
+          items:
+            type: string
+          type: array
+      type: object
+    Examination:
+      properties:
+        code:
+          description: The code
+          type: string
+        description:
+          description: The description
+          type: string
+        id:
+          description: The ID
+          format: uuid
+          type: string
+        name:
+          description: The name
+          type: string
+        possibleValues:
+          description: The possible result values
+          type: string
+        unit:
+          description: The unit
+          type: string
+      type: object
+    Gender:
+      enum:
+      - F
+      - M
+      - U
+      type: string
+      x-enum-varnames:
+      - F
+      - M
+      - U
+    HealthCheck:
+      example:
+        buildVersion: buildVersion
+        apiVersion:
+        - apiVersion
+        - apiVersion
+        service: service
+        status: status
+      properties:
+        apiVersion:
+          description: The API version
+          items:
+            type: string
+          type: array
+        buildVersion:
+          description: Docker build version
+          type: string
+        service:
+          description: The service name
+          type: string
+        status:
+          description: The service status
+          type: string
+      type: object
+    Link:
+      properties:
+        related:
+          description: The related link to the order
+          format: uri
+          type: string
+        self:
+          description: The link to order itself
+          format: uri
+          type: string
+      type: object
+    Location:
+      properties:
+        id:
+          description: The ID
+          format: uuid
+          type: string
+        name:
+          description: The name
+          type: string
+      type: object
+    LoginResponse:
+      example:
+        access_token: access_token
+        refresh_token: refresh_token
+        refresh_expires_in: 1
+        not-before-policy: 6
+        scope: scope
+        session_state: session_state
+        token_type: token_type
+        expires_in: 0
+      properties:
+        access_token:
+          description: The access token
+          type: string
+        expires_in:
+          description: The access token's expiry time window
+          type: integer
+        not-before-policy:
+          description: The date-time when the token becomes valid
+          type: integer
+        refresh_expires_in:
+          description: The refresh token's expiry time window
+          type: integer
+        refresh_token:
+          description: The refresh token
+          type: string
+        scope:
+          description: The session scope (api only)
+          type: string
+        session_state:
+          description: The session state
+          type: string
+        token_type:
+          description: The token type (Bearer only)
+          type: string
+      type: object
+    Order:
+      example:
+        reference: reference
+        bloodDonor: "{}"
+        examinations:
+        - reference: reference
+          sampleDate: 2000-01-23
+          sampleCodes:
+          - sampleCodes
+          - sampleCodes
+          id: id
+          results:
+          - result: result
+            unit: unit
+            resultYieldDateTime: 2000-01-23T04:56:07.000+00:00
+            analyte: analyte
+            resultType: resultType
+            status: "{}"
+          - result: result
+            unit: unit
+            resultYieldDateTime: 2000-01-23T04:56:07.000+00:00
+            analyte: analyte
+            resultType: resultType
+            status: "{}"
+          sampleTime: sampleTime
+        - reference: reference
+          sampleDate: 2000-01-23
+          sampleCodes:
+          - sampleCodes
+          - sampleCodes
+          id: id
+          results:
+          - result: result
+            unit: unit
+            resultYieldDateTime: 2000-01-23T04:56:07.000+00:00
+            analyte: analyte
+            resultType: resultType
+            status: "{}"
+          - result: result
+            unit: unit
+            resultYieldDateTime: 2000-01-23T04:56:07.000+00:00
+            analyte: analyte
+            resultType: resultType
+            status: "{}"
+          sampleTime: sampleTime
+        locationId: locationId
+        patient: "{}"
+        orderCreationDateTime: 2000-01-23T04:56:07.000+00:00
+        boneMarrowDonor: "{}"
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: "{}"
+        type: "{}"
+        pseudonym: "{}"
+      properties:
+        bloodDonor:
+          allOf:
+          - $ref: '#/components/schemas/BloodDonor'
+          description: The blood donor data when type is DONOR
+          type: object
+        boneMarrowDonor:
+          allOf:
+          - $ref: '#/components/schemas/BoneMarrowDonor'
+          description: The bone-marrow donor data when type is BONE_MARROW_DONOR
+          type: object
+        examinations:
+          description: The examinations belonging to the order
+          items:
+            $ref: '#/components/schemas/OrderExamination'
+          type: array
+        id:
+          description: The ID of the order
+          format: uuid
+          type: string
+        locationId:
+          description: Identifier of the location (client)
+          type: string
+        orderCreationDateTime:
+          description: The order creation date-time (yyyy-MM-dd'T'HH:mm:ss.SSSZ)
+          format: date-time
+          type: string
+        patient:
+          allOf:
+          - $ref: '#/components/schemas/Patient'
+          description: The patient data when type is PERSONAL
+          type: object
+        pseudonym:
+          allOf:
+          - $ref: '#/components/schemas/Pseudonym'
+          description: The pseudonym data when type is PSEUDONYMIZED
+          type: object
+        reference:
+          description: The external unique identifier of the order
+          type: string
+        state:
+          allOf:
+          - $ref: '#/components/schemas/OrderStateType'
+          description: The order state
+          type: object
+        type:
+          allOf:
+          - $ref: '#/components/schemas/OrderType'
+          description: The order type
+          type: object
+      required:
+      - examinations
+      - locationId
+      - type
+      type: object
+    OrderExamination:
+      example:
+        reference: reference
+        sampleDate: 2000-01-23
+        sampleCodes:
+        - sampleCodes
+        - sampleCodes
+        id: id
+        results:
+        - result: result
+          unit: unit
+          resultYieldDateTime: 2000-01-23T04:56:07.000+00:00
+          analyte: analyte
+          resultType: resultType
+          status: "{}"
+        - result: result
+          unit: unit
+          resultYieldDateTime: 2000-01-23T04:56:07.000+00:00
+          analyte: analyte
+          resultType: resultType
+          status: "{}"
+        sampleTime: sampleTime
+      properties:
+        id:
+          description: Reference to BloodLab Examination. On API called as ID.
+          type: string
+        reference:
+          description: The external unique identifier of the order
+          type: string
+        results:
+          description: The results belonging to the order
+          items:
+            $ref: '#/components/schemas/OrderResult'
+          type: array
+        sampleCodes:
+          description: The sample codes
+          items:
+            type: string
+          type: array
+        sampleDate:
+          description: The sample date
+          format: date
+          type: string
+        sampleTime:
+          description: The sample time
+          format: time
+          type: string
+      required:
+      - id
+      type: object
+    OrderMetadata:
+      example:
+        links: "{}"
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          description: The unique identifier of the order
+          format: uuid
+          type: string
+        links:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The links to the order
+          type: object
+      type: object
+    OrderResult:
+      example:
+        result: result
+        unit: unit
+        resultYieldDateTime: 2000-01-23T04:56:07.000+00:00
+        analyte: analyte
+        resultType: resultType
+        status: "{}"
+      properties:
+        analyte:
+          description: The analyte name
+          type: string
+        result:
+          description: The result
+          type: string
+        resultType:
+          description: The result type
+          type: string
+        resultYieldDateTime:
+          description: The result yield date-time
+          format: date-time
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/OrderResultStatus'
+          description: The result status
+          type: object
+        unit:
+          description: The unit
+          type: string
+      type: object
+    OrderResultStatus:
+      enum:
+      - FIN
+      - PRE
+      type: string
+      x-enum-varnames:
+      - FinalizedResult
+      - PreliminaryResult
+    OrderState:
+      properties:
+        id:
+          description: The external unique identifier of the order
+          type: string
+        state:
+          allOf:
+          - $ref: '#/components/schemas/OrderStateType'
+          description: The order state
+          type: object
+      required:
+      - id
+      - state
+      type: object
+    OrderStateType:
+      enum:
+      - CONFIRMATORY
+      - DELETED
+      - ENTERED
+      - FINALIZED
+      - PROCESSING
+      - WAITING_FOR_MATERIAL
+      type: string
+      x-enum-varnames:
+      - ConfirmatoryState
+      - DeletedState
+      - EnteredState
+      - FinalizedState
+      - ProcessingState
+      - WaitingForMaterialState
+    OrderType:
+      enum:
+      - DONOR
+      - BONE_MARROW_DONOR
+      - PERSONAL
+      - PSEUDONYMIZED
+      type: string
+      x-enum-varnames:
+      - BloodDonorType
+      - BoneMarrowDonorType
+      - PatientType
+      - PseudonymType
+    Page:
+      properties:
+        currentPage:
+          description: The actual page number
+          example: 1
+          type: integer
+        items:
+          description: The items
+          type: object
+        pageSize:
+          description: The number of items per page
+          example: 50
+          type: integer
+        totalCount:
+          description: The total count of items
+          example: 69
+          type: integer
+        totalPages:
+          description: The total pages
+          example: 2
+          type: integer
+      type: object
+    Patient:
+      properties:
+        address:
+          description: The address
+          type: string
+        city:
+          description: The city
+          type: string
+        country:
+          description: The country
+          type: string
+        dateOfBirth:
+          description: The date of birth (yyyy-MM-dd)
+          format: date
+          type: string
+        firstName:
+          description: The first name
+          type: string
+        gender:
+          allOf:
+          - $ref: '#/components/schemas/Gender'
+          description: "The gender (Female, Male, Unknown)"
+          type: object
+        lastName:
+          description: The last name
+          type: string
+        phoneNumberPrimary:
+          description: The primary phone number
+          type: string
+        phoneNumberSecondary:
+          description: The secondary phone number
+          type: string
+        postCode:
+          description: The post
+          type: string
+      required:
+      - address
+      - city
+      - country
+      - dateOfBirth
+      - firstName
+      - gender
+      - lastName
+      - phoneNumberPrimary
+      - postCode
+      type: object
+    Pseudonym:
+      properties:
+        code:
+          description: The code
+          type: string
+        dateOfBirth:
+          description: The date of birth (yyyy-MM-dd)
+          format: date
+          type: string
+        gender:
+          allOf:
+          - $ref: '#/components/schemas/Gender'
+          description: "The gender (Female, Male, Unknown)"
+          type: object
+      type: object
+    Selection:
+      example:
+        locationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: "{}"
+      properties:
+        ids:
+          description: The IDs of the desired type
+          items:
+            format: uuid
+            type: string
+          type: array
+        locationId:
+          description: The LocationId to create the selection with
+          format: uuid
+          type: string
+        type:
+          allOf:
+          - $ref: '#/components/schemas/SelectionType'
+          description: The selection type
+          type: object
+      required:
+      - ids
+      - locationId
+      - type
+      type: object
+    SelectionMetadata:
+      example:
+        links: "{}"
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: "{}"
+      properties:
+        id:
+          description: The ID of the selection
+          format: uuid
+          type: string
+        links:
+          allOf:
+          - $ref: '#/components/schemas/Link'
+          description: The links to the selection
+          type: object
+        type:
+          allOf:
+          - $ref: '#/components/schemas/SelectionType'
+          description: The selection type
+          type: object
+      type: object
+    SelectionType:
+      enum:
+      - DOCUMENT
+      - ORDER
+      - ORDER_STATE
+      type: string
+      x-enum-varnames:
+      - DocumentSelection
+      - OrderSelection
+      - OrderStateSelection
+    GetDocumentsV3_200_response:
+      allOf:
+      - $ref: '#/components/schemas/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/components/schemas/DocumentMetadata'
+            type: array
+        type: object
+    GetExaminationsV3_200_response:
+      allOf:
+      - $ref: '#/components/schemas/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/components/schemas/Examination'
+            type: array
+        type: object
+    GetLocationsV3_200_response:
+      allOf:
+      - $ref: '#/components/schemas/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/components/schemas/Location'
+            type: array
+        type: object
+    LoginV3_request:
+      properties:
+        grant_type:
+          default: password
+          description: The grant type to use for authentication
+          type: string
+        password:
+          description: The password
+          format: password
+          type: string
+        scope:
+          default: api
+          description: The requested scope
+          type: string
+        username:
+          description: The username
+          type: string
+      required:
+      - grant_type
+      - password
+      - scope
+      - username
+      type: object
+    GetOrderStatesV3_200_response:
+      allOf:
+      - $ref: '#/components/schemas/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/components/schemas/OrderState'
+            type: array
+        type: object
+    GetOrdersV3_200_response:
+      allOf:
+      - $ref: '#/components/schemas/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/components/schemas/Order'
+            type: array
+        type: object
+    GetSelectionDocumentsV3_200_response:
+      allOf:
+      - $ref: '#/components/schemas/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/components/schemas/Document'
+            type: array
+        type: object
+  securitySchemes:
+    BearerAuth:
+      in: header
+      name: Authorization
+      type: apiKey
+x-original-swagger-version: "2.0"
+
