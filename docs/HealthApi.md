@@ -18,11 +18,11 @@ Shows if the service is running or not.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.HealthApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.HealthApi;
 
 public class Example {
   public static void main(String[] args) {

@@ -19,12 +19,12 @@ Gets the state of all orders.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.OrderStateApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.OrderStateApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -108,12 +108,12 @@ Gets order states based on the specified selection.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.OrderStateApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.OrderStateApi;
 
 public class Example {
   public static void main(String[] args) {

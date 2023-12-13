@@ -1,0 +1,2583 @@
+{
+    "schemes": ["https"],
+    "swagger": "2.0",
+    "info": {
+        "description": "Lablink Swagger documentation",
+        "title": "Lablink",
+        "contact": {
+            "name": "DRK Blutspendedienst Baden-Wuerttemberg Hessen",
+            "url": "https://blutspende.de",
+            "email": "laborit@blutspende.de"
+        },
+        "license": {
+            "name": "Commercial license"
+        },
+        "version": "3.0"
+    },
+    "host": "blutspende.org",
+    "basePath": "/lablink",
+    "paths": {
+        "/api/documents": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets all document.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Document"
+                ],
+                "summary": "Get documents",
+                "operationId": "GetDocumentsV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "default": 0,
+                        "description": "The desired page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "maximum": 2000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 25,
+                        "description": "The desired number of items per page",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "description": "The sorting parameters in the format of \"fieldName,asc/desc\". E.g. type,desc",
+                        "name": "sort",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/DocumentMetadata"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/documents/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets a document.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Document"
+                ],
+                "summary": "Get document",
+                "operationId": "GetDocumentV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The document ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Document"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/examinations": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets all examination.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Examination"
+                ],
+                "summary": "Get examinations",
+                "operationId": "GetExaminationsV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "default": 0,
+                        "description": "The desired page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "maximum": 2000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 25,
+                        "description": "The desired number of items per page",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "description": "The sorting parameters in the format of \"fieldName,asc/desc\". E.g. type,desc",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The code filter",
+                        "name": "code",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The name filter",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The unit filter",
+                        "name": "unit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Examination"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/locations": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets all location.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Get locations",
+                "operationId": "GetLocationsV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "default": 0,
+                        "description": "The desired page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "maximum": 2000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 25,
+                        "description": "The desired number of items per page",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "description": "The sorting parameters in the format of \"fieldName,asc/desc\". E.g. type,desc",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The name filter",
+                        "name": "name",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Location"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "description": "Login and request access token.",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "operationId": "LoginV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "default": "password",
+                        "description": "The grant type to use for authentication",
+                        "name": "grant_type",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "format": "password",
+                        "description": "The password",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "api",
+                        "description": "The requested scope",
+                        "name": "scope",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "The username",
+                        "name": "username",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/LoginResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/order-states": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets the state of all orders.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Order",
+                    "OrderState"
+                ],
+                "summary": "Get order states",
+                "operationId": "GetOrderStatesV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "default": 0,
+                        "description": "The desired page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "maximum": 2000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 25,
+                        "description": "The desired number of items per page",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "description": "The sorting parameters in the format of \"fieldName,asc/desc\". E.g. type,desc",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The created-from filter (inclusive). Format: yyyy-MM-dd.",
+                        "name": "createdFrom",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The created-to filter (exclusive). Format: yyyy-MM-dd.",
+                        "name": "createdTo",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The searched content in the different dataset",
+                        "name": "searchContent",
+                        "in": "query"
+                    },
+                    {
+                        "enum": [
+                            "CONFIRMATORY",
+                            "DELETED",
+                            "ENTERED",
+                            "FINALIZED",
+                            "PROCESSING",
+                            "WAITING_FOR_MATERIAL"
+                        ],
+                        "type": "string",
+                        "description": "The state filter",
+                        "name": "state",
+                        "in": "query"
+                    },
+                    {
+                        "enum": [
+                            "DONOR",
+                            "BONE_MARROW_DONOR",
+                            "PERSONAL",
+                            "PSEUDONYMIZED"
+                        ],
+                        "type": "string",
+                        "description": "The type filter",
+                        "name": "type",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/OrderState"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/orders": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets all order.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get orders",
+                "operationId": "GetOrdersV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "default": 0,
+                        "description": "The desired page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "maximum": 2000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 25,
+                        "description": "The desired number of items per page",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "description": "The sorting parameters in the format of \"fieldName,asc/desc\". E.g. type,desc",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The created-from filter (inclusive). Format: yyyy-MM-dd.",
+                        "name": "createdFrom",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The created-to filter (exclusive). Format: yyyy-MM-dd.",
+                        "name": "createdTo",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The location filter",
+                        "name": "locationId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "The searched content in the different dataset",
+                        "name": "searchContent",
+                        "in": "query"
+                    },
+                    {
+                        "enum": [
+                            "CONFIRMATORY",
+                            "DELETED",
+                            "ENTERED",
+                            "FINALIZED",
+                            "PROCESSING",
+                            "WAITING_FOR_MATERIAL"
+                        ],
+                        "type": "string",
+                        "description": "The state filter",
+                        "name": "state",
+                        "in": "query"
+                    },
+                    {
+                        "enum": [
+                            "DONOR",
+                            "BONE_MARROW_DONOR",
+                            "PERSONAL",
+                            "PSEUDONYMIZED"
+                        ],
+                        "type": "string",
+                        "description": "The type filter",
+                        "name": "type",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Order"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Creates order(s).",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Create order(s)",
+                "operationId": "CreateOrdersV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "description": "The order data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Order"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/OrderMetadata"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "413": {
+                        "description": "Content Too Large",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Deletes all order.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Delete orders",
+                "operationId": "DeleteOrdersV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "description": "The order IDs",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Partially processed",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/orders/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets an order.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get order",
+                "operationId": "GetOrderV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The order ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Deletes an order.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Delete order",
+                "operationId": "DeleteOrderV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The order ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/orders/{id}/state": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets an order's state.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get order state",
+                "operationId": "GetOrderStateV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The order ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/OrderState"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/selections": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Creates a selection based on the provided Order ID-s over Documents, Orders or Order-states.\nA selection is used for creating Document, Order or Orders-state queries filtered by the provided Order ID-s.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Selection"
+                ],
+                "summary": "Create a selection",
+                "operationId": "CreateSelectionV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "description": "The selection data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Selection"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/SelectionMetadata"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Deletes selections by the provided selection IDs.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Selection"
+                ],
+                "summary": "Delete selections",
+                "operationId": "DeleteSelectionsV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "description": "The selection IDs",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/selections/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets the metadata of the specified selection.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Selection"
+                ],
+                "summary": "Get selection metadata",
+                "operationId": "GetSelectionV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The Selection ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SelectionMetadata"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Deletes a selection by the provided selection ID.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Selection"
+                ],
+                "summary": "Delete selection",
+                "operationId": "DeleteSelectionV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The Selection ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/selections/{id}/documents": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets documents based on the specified selection.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Selection",
+                    "Document"
+                ],
+                "summary": "Get selected documents",
+                "operationId": "GetSelectionDocumentsV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The Selection ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "default": 0,
+                        "description": "The desired page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "maximum": 2000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 25,
+                        "description": "The desired number of items per page",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "description": "The sorting parameters in the format of \"fieldName,asc/desc\". E.g. type,desc",
+                        "name": "sort",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Document"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/selections/{id}/order-states": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets order states based on the specified selection.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Selection",
+                    "Order",
+                    "OrderState"
+                ],
+                "summary": "Get selected order states",
+                "operationId": "GetSelectionOrdersStatesV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The Selection ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "default": 0,
+                        "description": "The desired page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "maximum": 2000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 25,
+                        "description": "The desired number of items per page",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "description": "The sorting parameters in the format of \"fieldName,asc/desc\". E.g. type,desc",
+                        "name": "sort",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/OrderState"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/selections/{id}/orders": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Gets Orders based on the specified selection.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Selection",
+                    "Order"
+                ],
+                "summary": "Get selected orders",
+                "operationId": "GetSelectionOrdersV3",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "3.0",
+                        "description": "The API version",
+                        "name": "x-api-version",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The Selection ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "default": 0,
+                        "description": "The desired page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "maximum": 2000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 25,
+                        "description": "The desired number of items per page",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "description": "The sorting parameters in the format of \"fieldName,asc/desc\". E.g. type,desc",
+                        "name": "sort",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Page"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Order"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/ApiError"
+                        }
+                    }
+                }
+            }
+        },
+        "/health": {
+            "get": {
+                "description": "Shows if the service is running or not.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Service health check",
+                "operationId": "GetHealth",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/HealthCheck"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ApiError": {
+            "type": "object",
+            "properties": {
+                "detail": {
+                    "description": "The message describing the error",
+                    "type": "string"
+                },
+                "errors": {
+                    "description": "The list of several errors",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Error"
+                    }
+                },
+                "instance": {
+                    "description": "The instance",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The response status code",
+                    "type": "integer"
+                },
+                "title": {
+                    "description": "The error title",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The error type",
+                    "type": "string"
+                }
+            }
+        },
+        "BloodDonor": {
+            "type": "object",
+            "required": [
+                "dateOfBirth",
+                "donationCode",
+                "donorCode",
+                "gender"
+            ],
+            "properties": {
+                "dateOfBirth": {
+                    "description": "The date of birth (yyyy-MM-dd)",
+                    "type": "string",
+                    "format": "date"
+                },
+                "donationCode": {
+                    "description": "The donation code",
+                    "type": "string"
+                },
+                "donorCode": {
+                    "description": "The donor code",
+                    "type": "string"
+                },
+                "gender": {
+                    "description": "The gender (Female, Male, Unknown)",
+                    "enum": [
+                        "F",
+                        "M",
+                        "U"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/Gender"
+                        }
+                    ]
+                }
+            }
+        },
+        "BoneMarrowDonor": {
+            "type": "object",
+            "properties": {
+                "donorCode": {
+                    "description": "The donor code",
+                    "type": "string"
+                }
+            }
+        },
+        "Document": {
+            "type": "object",
+            "properties": {
+                "filename": {
+                    "description": "The filename",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "The ID",
+                    "type": "string",
+                    "format": "uuid"
+                }
+            }
+        },
+        "DocumentMetadata": {
+            "type": "object",
+            "properties": {
+                "fileSize": {
+                    "description": "The file size",
+                    "type": "string"
+                },
+                "fileType": {
+                    "description": "The file type",
+                    "type": "string"
+                },
+                "filename": {
+                    "description": "The filename",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "The document ID",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "links": {
+                    "description": "The links to the file",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/Link"
+                        }
+                    ]
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "errors": {
+                    "description": "The list of several nested errors",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Error"
+                    }
+                },
+                "message": {
+                    "description": "The message",
+                    "type": "string"
+                },
+                "messageKey": {
+                    "description": "The message key",
+                    "type": "string"
+                },
+                "messageParams": {
+                    "description": "The message params (to be used optionally)",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "Examination": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "The code",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "The description",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "The ID",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "name": {
+                    "description": "The name",
+                    "type": "string"
+                },
+                "possibleValues": {
+                    "description": "The possible result values",
+                    "type": "string"
+                },
+                "unit": {
+                    "description": "The unit",
+                    "type": "string"
+                }
+            }
+        },
+        "Gender": {
+            "type": "string",
+            "enum": [
+                "F",
+                "M",
+                "U"
+            ],
+            "x-enum-varnames": [
+                "F",
+                "M",
+                "U"
+            ]
+        },
+        "HealthCheck": {
+            "type": "object",
+            "properties": {
+                "apiVersion": {
+                    "description": "The API version",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "buildVersion": {
+                    "description": "Docker build version",
+                    "type": "string"
+                },
+                "service": {
+                    "description": "The service name",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The service status",
+                    "type": "string"
+                }
+            }
+        },
+        "Link": {
+            "type": "object",
+            "properties": {
+                "related": {
+                    "description": "The related link to the order",
+                    "type": "string",
+                    "format": "uri"
+                },
+                "self": {
+                    "description": "The link to order itself",
+                    "type": "string",
+                    "format": "uri"
+                }
+            }
+        },
+        "Location": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The ID",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "name": {
+                    "description": "The name",
+                    "type": "string"
+                }
+            }
+        },
+        "LoginResponse": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "description": "The access token",
+                    "type": "string"
+                },
+                "expires_in": {
+                    "description": "The access token's expiry time window",
+                    "type": "integer"
+                },
+                "not-before-policy": {
+                    "description": "The date-time when the token becomes valid",
+                    "type": "integer"
+                },
+                "refresh_expires_in": {
+                    "description": "The refresh token's expiry time window",
+                    "type": "integer"
+                },
+                "refresh_token": {
+                    "description": "The refresh token",
+                    "type": "string"
+                },
+                "scope": {
+                    "description": "The session scope (api only)",
+                    "type": "string"
+                },
+                "session_state": {
+                    "description": "The session state",
+                    "type": "string"
+                },
+                "token_type": {
+                    "description": "The token type (Bearer only)",
+                    "type": "string"
+                }
+            }
+        },
+        "Order": {
+            "type": "object",
+            "required": [
+                "examinations",
+                "locationId",
+                "type"
+            ],
+            "properties": {
+                "bloodDonor": {
+                    "description": "The blood donor data when type is DONOR",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/BloodDonor"
+                        }
+                    ]
+                },
+                "boneMarrowDonor": {
+                    "description": "The bone-marrow donor data when type is BONE_MARROW_DONOR",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/BoneMarrowDonor"
+                        }
+                    ]
+                },
+                "examinations": {
+                    "description": "The examinations belonging to the order",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OrderExamination"
+                    }
+                },
+                "id": {
+                    "description": "The ID of the order",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "locationId": {
+                    "description": "Identifier of the location (client)",
+                    "type": "string"
+                },
+                "orderCreationDateTime": {
+                    "description": "The order creation date-time (yyyy-MM-dd'T'HH:mm:ss.SSSZ)",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "patient": {
+                    "description": "The patient data when type is PERSONAL",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/Patient"
+                        }
+                    ]
+                },
+                "pseudonym": {
+                    "description": "The pseudonym data when type is PSEUDONYMIZED",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/Pseudonym"
+                        }
+                    ]
+                },
+                "reference": {
+                    "description": "The external unique identifier of the order",
+                    "type": "string"
+                },
+                "state": {
+                    "description": "The order state",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/OrderStateType"
+                        }
+                    ]
+                },
+                "type": {
+                    "description": "The order type",
+                    "enum": [
+                        "BONE_MARROW_DONOR",
+                        "DONOR",
+                        "PERSONAL",
+                        "PSEUDONYMIZED"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/OrderType"
+                        }
+                    ]
+                }
+            }
+        },
+        "OrderExamination": {
+            "type": "object",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Reference to BloodLab Examination. On API called as ID.",
+                    "type": "string"
+                },
+                "reference": {
+                    "description": "The external unique identifier of the order",
+                    "type": "string"
+                },
+                "results": {
+                    "description": "The results belonging to the order",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OrderResult"
+                    }
+                },
+                "sampleCodes": {
+                    "description": "The sample codes",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "sampleDate": {
+                    "description": "The sample date",
+                    "type": "string",
+                    "format": "date"
+                },
+                "sampleTime": {
+                    "description": "The sample time",
+                    "type": "string",
+                    "format": "time"
+                }
+            }
+        },
+        "OrderMetadata": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The unique identifier of the order",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "links": {
+                    "description": "The links to the order",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/Link"
+                        }
+                    ]
+                }
+            }
+        },
+        "OrderResult": {
+            "type": "object",
+            "properties": {
+                "analyte": {
+                    "description": "The analyte name",
+                    "type": "string"
+                },
+                "result": {
+                    "description": "The result",
+                    "type": "string"
+                },
+                "resultType": {
+                    "description": "The result type",
+                    "type": "string"
+                },
+                "resultYieldDateTime": {
+                    "description": "The result yield date-time",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "status": {
+                    "description": "The result status",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/OrderResultStatus"
+                        }
+                    ]
+                },
+                "unit": {
+                    "description": "The unit",
+                    "type": "string"
+                }
+            }
+        },
+        "OrderResultStatus": {
+            "type": "string",
+            "enum": [
+                "FIN",
+                "PRE"
+            ],
+            "x-enum-varnames": [
+                "FinalizedResult",
+                "PreliminaryResult"
+            ]
+        },
+        "OrderState": {
+            "type": "object",
+            "required": [
+                "id",
+                "state"
+            ],
+            "properties": {
+                "id": {
+                    "description": "The external unique identifier of the order",
+                    "type": "string"
+                },
+                "state": {
+                    "description": "The order state",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/OrderStateType"
+                        }
+                    ]
+                }
+            }
+        },
+        "OrderStateType": {
+            "type": "string",
+            "enum": [
+                "CONFIRMATORY",
+                "DELETED",
+                "ENTERED",
+                "FINALIZED",
+                "PROCESSING",
+                "WAITING_FOR_MATERIAL"
+            ],
+            "x-enum-varnames": [
+                "ConfirmatoryState",
+                "DeletedState",
+                "EnteredState",
+                "FinalizedState",
+                "ProcessingState",
+                "WaitingForMaterialState"
+            ]
+        },
+        "OrderType": {
+            "type": "string",
+            "enum": [
+                "DONOR",
+                "BONE_MARROW_DONOR",
+                "PERSONAL",
+                "PSEUDONYMIZED"
+            ],
+            "x-enum-varnames": [
+                "BloodDonorType",
+                "BoneMarrowDonorType",
+                "PatientType",
+                "PseudonymType"
+            ]
+        },
+        "Page": {
+            "type": "object",
+            "properties": {
+                "currentPage": {
+                    "description": "The actual page number",
+                    "type": "integer",
+                    "example": 1
+                },
+                "items": {
+                    "description": "The items"
+                },
+                "pageSize": {
+                    "description": "The number of items per page",
+                    "type": "integer",
+                    "example": 50
+                },
+                "totalCount": {
+                    "description": "The total count of items",
+                    "type": "integer",
+                    "example": 69
+                },
+                "totalPages": {
+                    "description": "The total pages",
+                    "type": "integer",
+                    "example": 2
+                }
+            }
+        },
+        "Patient": {
+            "type": "object",
+            "required": [
+                "address",
+                "city",
+                "country",
+                "dateOfBirth",
+                "firstName",
+                "gender",
+                "lastName",
+                "phoneNumberPrimary",
+                "postCode"
+            ],
+            "properties": {
+                "address": {
+                    "description": "The address",
+                    "type": "string"
+                },
+                "city": {
+                    "description": "The city",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "The country",
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "description": "The date of birth (yyyy-MM-dd)",
+                    "type": "string",
+                    "format": "date"
+                },
+                "firstName": {
+                    "description": "The first name",
+                    "type": "string"
+                },
+                "gender": {
+                    "description": "The gender (Female, Male, Unknown)",
+                    "enum": [
+                        "F",
+                        "M",
+                        "U"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/Gender"
+                        }
+                    ]
+                },
+                "lastName": {
+                    "description": "The last name",
+                    "type": "string"
+                },
+                "phoneNumberPrimary": {
+                    "description": "The primary phone number",
+                    "type": "string"
+                },
+                "phoneNumberSecondary": {
+                    "description": "The secondary phone number",
+                    "type": "string"
+                },
+                "postCode": {
+                    "description": "The post",
+                    "type": "string"
+                }
+            }
+        },
+        "Pseudonym": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "The code",
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "description": "The date of birth (yyyy-MM-dd)",
+                    "type": "string",
+                    "format": "date"
+                },
+                "gender": {
+                    "description": "The gender (Female, Male, Unknown)",
+                    "enum": [
+                        "F",
+                        "M",
+                        "U"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/Gender"
+                        }
+                    ]
+                }
+            }
+        },
+        "Selection": {
+            "type": "object",
+            "required": [
+                "ids",
+                "locationId",
+                "type"
+            ],
+            "properties": {
+                "ids": {
+                    "description": "The IDs of the desired type",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "locationId": {
+                    "description": "The LocationId to create the selection with",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "type": {
+                    "description": "The selection type",
+                    "enum": [
+                        "DOCUMENT",
+                        "ORDER",
+                        "ORDER_STATE"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/SelectionType"
+                        }
+                    ]
+                }
+            }
+        },
+        "SelectionMetadata": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The ID of the selection",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "links": {
+                    "description": "The links to the selection",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/Link"
+                        }
+                    ]
+                },
+                "type": {
+                    "description": "The selection type",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/SelectionType"
+                        }
+                    ]
+                }
+            }
+        },
+        "SelectionType": {
+            "type": "string",
+            "enum": [
+                "DOCUMENT",
+                "ORDER",
+                "ORDER_STATE"
+            ],
+            "x-enum-varnames": [
+                "DocumentSelection",
+                "OrderSelection",
+                "OrderStateSelection"
+            ]
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+<settings>
+<profiles>
+<profile>
+<id>ossrh</id>
+<activation>
+<activeByDefault>true</activeByDefault>
+</activation>
+<properties>
+<gpg.passphrase><!-- gpg passphrase here--></gpg.passphrase>
+</properties>
+</profile>
+</profiles>
+
+<servers>
+<server>
+<id>ossrh</id>
+<username><!-- username here --></username>
+<password><!-- password here --></password>
+</server>
+</servers>
+
+</settings>
+

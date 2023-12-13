@@ -24,12 +24,12 @@ Creates a selection based on the provided Order ID-s over Documents, Orders or O
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.SelectionApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.SelectionApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -99,12 +99,12 @@ Deletes a selection by the provided selection ID.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.SelectionApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.SelectionApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -173,12 +173,12 @@ Deletes selections by the provided selection IDs.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.SelectionApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.SelectionApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -247,12 +247,12 @@ Gets documents based on the specified selection.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.SelectionApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.SelectionApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -329,12 +329,12 @@ Gets order states based on the specified selection.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.SelectionApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.SelectionApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -411,12 +411,12 @@ Gets Orders based on the specified selection.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.SelectionApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.SelectionApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -493,12 +493,12 @@ Gets the metadata of the specified selection.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.SelectionApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.SelectionApi;
 
 public class Example {
   public static void main(String[] args) {

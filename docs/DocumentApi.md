@@ -20,12 +20,12 @@ Gets a document.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.DocumentApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.DocumentApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -96,12 +96,12 @@ Gets all document.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.DocumentApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.DocumentApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -175,12 +175,12 @@ Gets documents based on the specified selection.
 ### Example
 ```java
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.DocumentApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.auth.*;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.DocumentApi;
 
 public class Example {
   public static void main(String[] args) {

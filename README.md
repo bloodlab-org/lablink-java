@@ -2,7 +2,7 @@
 
 Lablink
 - API version: 3.0
-  - Build date: 2023-12-12T04:43:46.153841900+01:00[Europe/Berlin]
+  - Build date: 2023-12-12T06:34:53.661463+01:00[Europe/Berlin]
 
 Lablink Swagger documentation
 
@@ -81,11 +81,11 @@ Please follow the [installation](#installation) instruction and execute the foll
 ```java
 
 // Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.AuthApi;
+import org.blutspende.lablink.ApiClient;
+import org.blutspende.lablink.ApiException;
+import org.blutspende.lablink.Configuration;
+import org.blutspende.lablink.models.*;
+import org.blutspende.lablink.api.AuthApi;
 
 public class Example {
   public static void main(String[] args) {
